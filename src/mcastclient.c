@@ -59,6 +59,7 @@ exit(1);
 else
 printf("Binding datagram socket...OK.\n");
 
+/* A class D Internet address in the range 224.0.0.1 to 239.255.255.255 identifies a host group.*/
 /* Join the multicast group 226.1.1.1 on the local 203.106.93.94 */
 /* interface. Note that this IP_ADD_MEMBERSHIP option must be */
 /* called for each local interface over which the multicast */

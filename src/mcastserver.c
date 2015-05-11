@@ -33,6 +33,8 @@ else
 /* group address of 225.1.1.1 and port 5555. */
 memset((char *) &groupSock, 0, sizeof(groupSock));
 groupSock.sin_family = AF_INET;
+
+/* A class D Internet address in the range 224.0.0.1 to 239.255.255.255 identifies a host group. */
 groupSock.sin_addr.s_addr = inet_addr("226.1.1.1");
 groupSock.sin_port = htons(4321);
 
