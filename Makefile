@@ -1,28 +1,39 @@
 SRCDIR = src
 OBJDIR = obj
-BINDIR = .
+BINDIR = bin
 
 CC = gcc
 
-SOURCES  := $(wildcard $(SRCDIR)/*.c)
+#SOURCES  := $(wildcard $(SRCDIR)/*.c)
 
-all: socket_select mcastserver mcastclient ip_detect get_ips get_ips_v6
+programs=socket_select mcastserver mcastclient ip_detect get_ips get_ips_v6
 
-socket_select: $(SRCDIR)/socket_select.o
+all: $(programs)
+
+$(OBJDIR)/%.o : $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+socket_select: $(OBJDIR)/socket_select.o
 	$(CC) -o $@ $^ $(LDFLAGS) 
 	
-mcastserver: $(SRCDIR)/mcastserver.o
+mcastserver: $(OBJDIR)/mcastserver.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 	 
-mcastclient: $(SRCDIR)/mcastclient.o
+mcastclient: $(OBJDIR)/mcastclient.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 	 
-ip_detect: $(SRCDIR)/ip_detect.o
+ip_detect: $(OBJDIR)/ip_detect.o
 	$(CC) -o $@ $^ $(LDFLAGS) 
 	
-get_ips: $(SRCDIR)/get_ips.o
+get_ips: $(OBJDIR)/get_ips.o
 	$(CC) -o $@ $^ $(LDFLAGS) 
 	
-get_ips_v6: $(SRCDIR)/get_ips_v6.o
+get_ips_v6: $(OBJDIR)/get_ips_v6.o
 	$(CC) -o $@ $^ $(LDFLAGS) 
+	
+clean:
+	rm -rf obj/*
+	rm -rf bin/*
+	
+	
 	
